@@ -1,0 +1,5 @@
+<h1>Users</h1>
+<p><strong><%= @users.count%></strong> user(s) found<p>
+<% @users.each do |user| %>
+  <p><strong>Email</strong> <%= link_to user.email , user  %></p>
+<% end %>

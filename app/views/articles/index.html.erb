@@ -1,0 +1,19 @@
+<h1>Articles</h1>
+<% if session[:user_id]%>
+  <%= link_to 'Write new article', new_article_path, class: "btn btn-info" %>
+  <% else %>
+  <%= link_to 'Login', login_path, class: "btn btn-info"  %> to create new article
+<% end %>
+<br>
+  <p><strong><%=  @articles.count%></strong> article(s) found</p>
+
+  <% @articles.each do |article| %>
+    <h2><%= link_to article.title, article_path(article) %></h2>
+    <p><%= truncate(article.text, :length => 200) %></p>
+
+    <p><strong>Written by: </strong> <%= link_to article.user.email, user_path(article.user) %> on <%= article.created_at.to_date%></p>
+    <% if article.user_id == session[:user_id] %>
+      <%= link_to 'Edit', edit_article_path(article) , class: "btn btn-info"%>
+    <% end %>
+    
+  <% end %>

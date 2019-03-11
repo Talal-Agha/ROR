@@ -1,0 +1,17 @@
+<div class="jumbotron">
+    <h1>Welcome</h1> 
+    <p>This is my awesome ruby blog.</p> 
+</div>
+<h1>My Latest Article(s)</h1>
+<div class="row">
+  <% @articles.each do |article| %>
+  <div class="col-sm-12">
+       <h3><%= link_to article.title, article_path(article) %></h3>
+       <p><%= truncate(article.text, :length => 200) %></p>
+      <p><strong>Written by: </strong> <%= link_to article.user.email, user_path(article.user) %> on <%= article.created_at.to_date%></p>
+      <% if article.user_id == session[:user_id] %>
+        <%= link_to 'Edit', edit_article_path(article) , class: "btn btn-info" %>
+      <% end %>
+</div>
+  <% end %>
+  </div> 

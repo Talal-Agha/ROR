@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </head>
+
+  <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">My Blog</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Home', controller: 'welcome' %></li>
+      <li><%= link_to 'Articles', controller: 'articles' %></li>
+      <li><%= link_to 'Users', controller: 'users' %></li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    <% if current_user %>
+  <li><%= link_to current_user.email, user_path(current_user)  %></li>
+  <li><%= link_to 'Log Out', logout_path %></li>
+<% else %>
+  <li><%= link_to 'Log In', login_path %></li>
+  <li><%= link_to 'Sign Up', signup_path %></li> 
+<% end %>
+      
+    </ul>
+  </div>
+</nav>
+   <div class="container">
+    <% if notice %>
+      <div class="alert alert-info">
+        <%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger">
+        <%= alert %>
+      </div>
+    <% end %>
+
+   <%= yield %>
+   </div>
+  </body>
+</html>

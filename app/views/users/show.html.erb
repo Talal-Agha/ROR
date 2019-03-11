@@ -1,0 +1,20 @@
+<h1>User</h1>
+
+<h3><%= @user.email %></h3>
+  <% if current_user && current_user.id == @user.id %>
+    <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-info" %> |
+  <% end %>
+
+<%= link_to 'Back', users_path, class: "btn btn-primary" %>
+
+<p><strong><%=  @user.articles.count%></strong> article(s) is written by this user</p>
+
+<% @articles.each do |article| %>
+  <h3><%= link_to article.title, article_path(article) %></h3>
+  <p><%= truncate(article.text, :length => 200) %></p>
+  <p><strong>Written at: </strong> <%= article.created_at.to_date%></p>
+  <% if article.user_id == session[:user_id] %>
+    <%= link_to 'Edit', edit_article_path(article), class: "btn btn-info" %>
+  <% end %>
+  
+<% end %>

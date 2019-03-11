@@ -1,0 +1,7 @@
+<%= link_to 'Back', articles_path, class: "btn btn-primary" %>
+<% if @article.user_id == session[:user_id] %>
+ | <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-info" %>
+<% end %>
+<h3><%= @article.title %></h3>
+<p><%= @article.text %></p>
+<p><strong>Written by: </strong> <%= @article.user.email %> on <%= @article.created_at.to_date%></p>
